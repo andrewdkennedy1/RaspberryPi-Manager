@@ -11,6 +11,6 @@ Modify credentials in reboot.py and refresh.py
 
 update pis.txt with a target pi per line 
 
-`apt-get install xdotool` on all pis for the fresh functionality to work 
+`apt-get install xdotool` on all pis for the refresh functionality to work 
 
 run main.py and goto the localhost:8081 #or whatever port you set in main.py 
