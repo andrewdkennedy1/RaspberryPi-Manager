@@ -1,0 +1,65 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        button#refreshing {
+            display: none;
+            cursor: wait;
+        }
+    </style>
+    <script type="text/javascript">
+        // <![CDATA[
+        function refreshing() {
+            $("#refresh").hide();
+            $("#refreshing").show();
+        }
+        // ]]>
+    </script>
+    <script type="text/javascript">
+        // <![CDATA[
+        function done() {
+            $("#refreshing").hide();
+            $("#refresh").show();
+        }
+        // ]]>
+    </script>
+</head>
+<body>
+    <div id="content">
+        <center>
+            <h1>BPC TV Utility</h1>
+            <br /> The buttons below will send the command to all TVs<br /><br />
+            <button class="btn btn-lg btn-primary" id='refresh' type="button" onclick="refreshing();">Refresh</button>
+            <button class="btn btn-lg btn-danger" id='refreshing' type="button">Refreshing All TVs...<br />This may take some time</button>&nbsp;
+            <script>
+            $('#refresh').click(function() {
+                $.ajax({
+                      type:'POST',
+                      url: "{{ url_for('refresh')}}",
+                      dataType:"text",
+                      success: function(response){
+                          console.log(response);
+                          console.log("All Raspberry PIs have been sent the refresh command");
+                          done();
+                      }
+              });
+            });
+            </script>
+            <button class="btn btn-lg btn-warning" id='reboot' type="button">Reboot</button>
+            <script>
+            $('#reboot').click(function() {
+                $.ajax({
+                      type:'POST',
+                      url: "{{ url_for('reboot')}}",
+                      dataType:"text",
+                      success: function(response){
+                         console.log(response);
+                         console.log("All Raspberry PIs have been sent the reboot command");
+                      }
+              });
+            });
+            </script>
+        </center>
+    </div>
+</body>
