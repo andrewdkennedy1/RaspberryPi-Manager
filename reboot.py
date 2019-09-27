@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#  Reboot all TVPI 
+#  Reboot all PI 
 import paramiko
 import time
 from flask import jsonify
@@ -52,7 +52,7 @@ def rb2():
     username = '<PI USERNAME>'
     password = '<PI PASSWORD>'
     keyfile_path = 'private_key_file'
-    tvpis = open("pis.txt").read().split('\n')
-    for line in tvpis:
+    pis = open("pis.txt").read().split('\n')
+    for line in pis:
         rb(line, port, username, password, None, None, "sudo reboot")
     return "success"
