@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#  refresh all TVPI 
+#  refresh all PI 
 import paramiko
 import time
 from flask import jsonify
@@ -52,7 +52,7 @@ def rf2():
     username = '<PI USERNAME>'
     password = '<PI PASSWORD>'
     keyfile_path = 'private_key_file'
-    tvpis = open("pis.txt").read().split('\n')
-    for line in tvpis:
+    pis = open("pis.txt").read().split('\n')
+    for line in pis:
         rf(line, port, username, password, None, None, "export DISPLAY=:0.0 && xdotool key F5")
     return "success"
